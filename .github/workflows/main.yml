@@ -1,0 +1,32 @@
+
+on:
+  push:
+    branches:
+      - main  # Ejecutar solo en la rama principal (puedes cambiarla si usas otra rama)
+
+jobs:
+  test-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Descargar el código del repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configurar Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9  # Especifica la versión de Python
+
+      # Instalar dependencias
+      - name: Install pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      # Ejecutar pruebas
+      - name: Run tests
+        run: pytest test.py
+        
+        
